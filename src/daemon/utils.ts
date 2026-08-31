@@ -48,9 +48,9 @@ export function getSocketPath(sessionId: string): string {
   }
 
   // 1. Try XDG_RUNTIME_DIR (Linux standard, sometimes macOS)
-  if (process.env.XDG_RUNTIME_DIR) {
-    return path.join(process.env.XDG_RUNTIME_DIR, appName, 'server.sock');
-  }
+  // if (process.env.XDG_RUNTIME_DIR) {
+  //   return path.join(process.env.XDG_RUNTIME_DIR, appName, 'server.sock');
+  // }
 
   // 2. macOS/Unix Fallback: Use /tmp/
   // We use /tmp/ because it is much shorter than ~/Library/Application Support/
@@ -66,9 +66,9 @@ export function getRuntimeHome(sessionId: string): string {
   const appName = APP_NAME + suffix;
 
   // 1. Check for the modern Unix standard
-  if (process.env.XDG_RUNTIME_DIR) {
-    return path.join(process.env.XDG_RUNTIME_DIR, appName);
-  }
+  // if (process.env.XDG_RUNTIME_DIR) {
+  //   return path.join(process.env.XDG_RUNTIME_DIR, appName);
+  // }
 
   // 2. Fallback for macOS and older Linux
   if (platform === 'darwin' || platform === 'linux') {
@@ -113,7 +113,7 @@ export function isDaemonRunning(sessionId: string): boolean {
   const pid = getDaemonPid(sessionId);
   if (pid) {
     try {
-      process.kill(pid, 0); // Throws if process doesn't exist
+      // process.kill(pid, 0); // Throws if process doesn't exist
       return true;
     } catch {
       // Process is dead, stale PID file. Proceed with startup.
